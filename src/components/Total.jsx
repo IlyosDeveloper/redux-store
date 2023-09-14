@@ -18,7 +18,7 @@ function Total() {
       {sumCount > 0 && (
         <>
           <p>Total: </p>
-          <span className="text-lime-600"> {sumCount}$</span>
+          <span className="text-lime-600">${sumCount}</span>
         </>
       )}
     </div>

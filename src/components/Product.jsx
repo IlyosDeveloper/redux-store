@@ -1,9 +1,5 @@
 import { useDispatch } from "react-redux";
-import {
-  decrement,
-  increment,
-  remove,
-} from "../redux/features/basketSlice";
+import { decrement, increment, removeOne } from "../redux/features/basketSlice";
 
 function Product({ name, amount, price, image }) {
   const dispatch = useDispatch();
@@ -17,7 +13,7 @@ function Product({ name, amount, price, image }) {
           <p className="font-medium">{name}</p>
           <p className="font-medium">${price}</p>
           <button
-            onClick={() => dispatch(remove(name))}
+            onClick={() => dispatch(removeOne(name))}
             className="text-red-500 tracking-wider"
           >
             Remove
@@ -26,9 +22,22 @@ function Product({ name, amount, price, image }) {
       </div>
 
       <div className="flex items-center gap-2">
-        <button onClick={() => dispatch(decrement(name))}>-</button>
-        <p>{amount}</p>
-        <button onClick={() => dispatch(increment(name))}>+</button>
+        <button
+          className="text-4xl"
+          onClick={() => {
+            if (amount == 1) {
+              dispatch(removeOne(name));
+            } else {
+              dispatch(decrement(name));
+            }
+          }}
+        >
+          -
+        </button>
+        <p className="text-2xl">{amount}</p>
+        <button className="text-3xl" onClick={() => dispatch(increment(name))}>
+          +
+        </button>
       </div>
     </div>
   );
